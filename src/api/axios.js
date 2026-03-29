@@ -22,4 +22,19 @@ api.interceptors.request.use(
   }
 );
 
+// Response interceptor to handle unauthorized/forbidden errors
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+      // If unauthorized or forbidden, clear token and redirect
+      sessionStorage.removeItem('token');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
+
 export default api;
