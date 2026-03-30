@@ -123,48 +123,14 @@ export default function Landing() {
       </Box>
 
       {/* Footer */}
-      <Box sx={{ py: 8, borderTop: '1px solid rgba(255,255,255,0.05)', bgcolor: 'rgba(0,0,0,0.5)' }}>
+      <Box sx={{ py: 6, borderTop: '1px solid rgba(255,255,255,0.05)', bgcolor: 'rgba(0,0,0,0.5)', textAlign: 'center' }}>
         <Container maxWidth="lg">
-          <Grid container spacing={5}>
-            <Grid item xs={12} md={4}>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 3 }}>
-                <img src="/logo.png" alt="Ledgerly" style={{ width: 30, height: 30 }} />
-                <Typography variant="h6" fontWeight="900" sx={{ color: "#fff" }}>
-                  Ledgerly
-                </Typography>
-              </Box>
-              <Typography variant="body2" sx={{ color: '#718096', lineHeight: 1.8 }}>
-                The ultimate companion for personal and shared finance. Simplify your life, track your wealth, and reach your goals.
-              </Typography>
-            </Grid>
-            <Grid item xs={6} md={2}>
-              <Typography variant="subtitle1" fontWeight="bold" sx={{ color: '#fff', mb: 3 }}>Product</Typography>
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <Link onClick={() => navigate("/dashboard")} sx={{ color: '#718096', cursor: 'pointer', textDecoration: 'none', '&:hover': { color: '#10B981' } }}>Dashboard</Link>
-                <Link onClick={() => navigate("/about")} sx={{ color: '#718096', cursor: 'pointer', textDecoration: 'none', '&:hover': { color: '#10B981' } }}>About Us</Link>
-              </Box>
-            </Grid>
-            <Grid item xs={6} md={2}>
-              <Typography variant="subtitle1" fontWeight="bold" sx={{ color: '#fff', mb: 3 }}>Legal</Typography>
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <Link onClick={() => navigate("/privacy-policy")} sx={{ color: '#718096', cursor: 'pointer', textDecoration: 'none', '&:hover': { color: '#10B981' } }}>Privacy Policy</Link>
-                <Link onClick={() => navigate("/terms-of-service")} sx={{ color: '#718096', cursor: 'pointer', textDecoration: 'none', '&:hover': { color: '#10B981' } }}>Terms of Use</Link>
-              </Box>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="subtitle1" fontWeight="bold" sx={{ color: '#fff', mb: 3 }}>Support</Typography>
-              <Link onClick={() => navigate("/contact")} sx={{ color: '#10B981', fontWeight: 'bold', cursor: 'pointer', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
-                ledgerly.info@gmail.com
-              </Link>
-            </Grid>
-          </Grid>
-          <Box sx={{ mt: 8, pt: 8, borderTop: '1px solid rgba(255,255,255,0.05)', textAlign: 'center' }}>
-            <Typography variant="body2" sx={{ color: '#4A5568' }}>
-              © 2026 Ledgerly. All rights reserved.
-            </Typography>
-          </Box>
+          <Typography variant="body2" sx={{ color: '#4A5568' }}>
+            © 2026 Ledgerly. All rights reserved.
+          </Typography>
         </Container>
       </Box>
+
     </Box>
   );
 }
