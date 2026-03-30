@@ -60,6 +60,8 @@ import {
 import { getDashboardData, getGroupDashboardData } from "../../api/dashboard";
 import { getUserGroups } from "../../api/groups";
 import dayjs from "dayjs";
+import Ads from "../../components/Ads/Ads";
+
 
 const COLORS = [
   "#10b981",
@@ -582,8 +584,12 @@ export default function Dashboard() {
                 </Box>
               </Box>
             </Paper>
+
+            {/* AdSense Integration */}
+            <Ads adSlot="0987654321" />
           </Box>
         </Box>
+
 
         {/* ===================== SECTION 2 ===================== */}
         <Box sx={{ display: "flex", justifyContent: "center", mb: 6 }}>

@@ -25,6 +25,8 @@ import { getAllTags } from "../../api/tags";
 import { logTransaction, downloadBulkTemplate, bulkUploadTransactions } from "../../api/transactions";
 import { getUserGroups } from "../../api/groups";
 import { Download, Upload } from "lucide-react";
+import Ads from "../../components/Ads/Ads";
+
 
 const validationSchema = Yup.object({
   type: Yup.string().required("Transaction type is required"),
@@ -564,6 +566,10 @@ export default function LogTransaction() {
           </Box>
         </Box>
       </Paper>
+
+      {/* AdSense Integration */}
+      <Ads adSlot="5432109876" sx={{ mt: 4 }} />
     </Box>
+
   );
 }

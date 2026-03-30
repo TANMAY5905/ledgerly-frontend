@@ -44,6 +44,8 @@ import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import Ads from "../../components/Ads/Ads";
+
 
 const MySwal = withReactContent(Swal);
 
@@ -264,7 +266,7 @@ export default function TransactionHistory() {
   const renderTags = (transactionTags) => {
     if (!transactionTags || transactionTags.length === 0) return "-";
     return (
-      <Box sx={{ display: "flex", gap: 0.5, flexWrap: "wrap" }}>
+      <Box sx={{ display: "flex", gap: 0.5, flexWrap: "wrap", justifyContent: "center" }}>
         {transactionTags.map((item) => {
           const tag = item.tag;
           if (!tag) return null;
@@ -283,6 +285,7 @@ export default function TransactionHistory() {
         })}
       </Box>
     );
+
   };
 
   return (
@@ -510,6 +513,10 @@ export default function TransactionHistory() {
           Reset Filters
         </Button>
       </Box>
+
+      {/* AdSense Integration */}
+      <Ads adSlot="1234567890" sx={{ mb: 4 }} />
+
 
       <Paper
         elevation={0}
