@@ -14,6 +14,11 @@ const UpdateTransaction = React.lazy(() => import('./pages/UpdateTransaction/Upd
 const TransactionHistory = React.lazy(() => import('./pages/TransactionHistory/TransactionHistory'));
 const Groups = React.lazy(() => import('./pages/Groups/Groups'));
 const ResetPassword = React.lazy(() => import('./pages/ResetPassword/ResetPassword'));
+const About = React.lazy(() => import('./pages/About/About'));
+const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy/PrivacyPolicy'));
+const TermsOfService = React.lazy(() => import('./pages/TermsOfService/TermsOfService'));
+const Contact = React.lazy(() => import('./pages/Contact/Contact'));
+
 
 function App() {
   return (
@@ -36,7 +41,12 @@ function App() {
               <Route path="/update-transaction/:id" element={<UpdateTransaction />} />
               <Route path="/transaction-history" element={<TransactionHistory />} />
               <Route path="/groups" element={<Groups />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="/contact" element={<Contact />} />
             </Route>
+
           </Route>
           
           {/* Catch all fallback */}

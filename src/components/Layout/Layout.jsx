@@ -35,8 +35,14 @@ import {
   Menu as MenuIcon,
   LogOut,
   Bell,
-  Tag
+  Tag,
+  Info,
+  Shield,
+  FileText,
+  Mail as MailIcon
 } from 'lucide-react';
+
+
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { createTag } from '../../api/tags';
@@ -55,6 +61,14 @@ const menuItems = [
   { text: 'Transaction History', icon: <History size={20} />, path: '/transaction-history' },
   { text: 'Groups', icon: <Users size={20} />, path: '/groups' }
 ];
+
+const legalItems = [
+  { text: 'About Us', icon: <Info size={18} />, path: '/about' },
+  { text: 'Privacy Policy', icon: <Shield size={18} />, path: '/privacy-policy' },
+  { text: 'Terms of Service', icon: <FileText size={18} />, path: '/terms-of-service' },
+  { text: 'Contact Us', icon: <MailIcon size={18} />, path: '/contact' }
+];
+
 
 export default function Layout() {
   const navigate = useNavigate();
@@ -227,6 +241,53 @@ export default function Layout() {
         })}
       </List>
 
+      <Divider sx={{ bgcolor: 'rgba(255,255,255,0.05)', mx: 2, my: 1 }} />
+      
+      <Box sx={{ px: 3, pt: 1, pb: 0.5 }}>
+        <Typography variant="overline" sx={{ color: '#4A5568', fontWeight: 'bold', letterSpacing: 1.2 }}>
+          Legal & Info
+        </Typography>
+      </Box>
+
+      <List sx={{ px: 2, mb: 2 }}>
+        {legalItems.map((item) => {
+          const isActive = location.pathname === item.path;
+          return (
+            <ListItem key={item.text} disablePadding sx={{ mb: 0.5 }}>
+              <ListItemButton
+                onClick={() => {
+                  navigate(item.path);
+                  if (isMobile) setMobileOpen(false);
+                }}
+                sx={{
+                  borderRadius: 2,
+                  bgcolor: isActive ? 'rgba(16, 185, 129, 0.1)' : 'transparent',
+                  color: isActive ? '#10B981' : '#718096',
+                  py: 0.75,
+                  '&:hover': {
+                    bgcolor: 'rgba(16, 185, 129, 0.05)',
+                    color: '#10B981',
+                  },
+                  transition: 'all 0.2s',
+                }}
+              >
+                <ListItemIcon sx={{ color: 'inherit', minWidth: 36 }}>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText 
+                  primary={item.text} 
+                  primaryTypographyProps={{ 
+                    fontWeight: isActive ? 600 : 500,
+                    fontSize: '0.85rem'
+                  }} 
+                />
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+      </List>
+
+
       {/* Bottom User Profile Section */}
       <Box sx={{ p: 2 }}>
         <Box 
@@ -361,7 +422,8 @@ export default function Layout() {
                 pointerEvents: 'none' // So it doesn't block clicks underneath if it overlaps
               }}
             >
-              <Tips />
+              {/* <Tips /> */}
+
             </Box>
             
             {/* Tag / Category Creation Icon */}
