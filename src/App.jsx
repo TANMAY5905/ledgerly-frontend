@@ -14,8 +14,10 @@ const UpdateTransaction = React.lazy(() => import('./pages/UpdateTransaction/Upd
 const TransactionHistory = React.lazy(() => import('./pages/TransactionHistory/TransactionHistory'));
 const Groups = React.lazy(() => import('./pages/Groups/Groups'));
 const ResetPassword = React.lazy(() => import('./pages/ResetPassword/ResetPassword'));
+const Landing = React.lazy(() => import('./pages/Landing/Landing'));
 const About = React.lazy(() => import('./pages/About/About'));
 const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy/PrivacyPolicy'));
+
 const TermsOfService = React.lazy(() => import('./pages/TermsOfService/TermsOfService'));
 const Contact = React.lazy(() => import('./pages/Contact/Contact'));
 
@@ -25,7 +27,8 @@ function App() {
     <BrowserRouter>
       <Suspense fallback={<FullPageLoader text="Loading amazing things..." />}>
         <Routes>
-          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route path="/" element={<Landing />} />
+
           
           {/* Public Routes */}
           <Route element={<PublicRoute />}>
@@ -50,7 +53,8 @@ function App() {
           </Route>
           
           {/* Catch all fallback */}
-          <Route path="*" element={<Navigate to="/login" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+
         </Routes>
       </Suspense>
     </BrowserRouter>

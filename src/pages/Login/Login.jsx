@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+
 import { 
   Box, 
   Container, 
@@ -22,7 +23,10 @@ import { loginAPI, registerAPI, forgotPasswordAPI } from '../../api/auth';
 import { FullPageLoader } from '../../components/Loader/CoinLoader';
 
 export default function Login() {
-  const [isLogin, setIsLogin] = useState(true);
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const initialMode = searchParams.get('mode');
+  const [isLogin, setIsLogin] = useState(initialMode !== 'signup');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
@@ -30,7 +34,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+
 
   // Forgot password states
   const [showForgotModal, setShowForgotModal] = useState(false);
