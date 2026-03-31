@@ -28,8 +28,10 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response && (error.response.status === 401 || error.response.status === 403)) {
-      // If unauthorized or forbidden, clear token and redirect
+    const isAuthRequest = error.config?.url?.includes('/auth/login') || error.config?.url?.includes('/auth/register');
+    
+    if (error.response && (error.response.status === 401 || error.response.status === 403) && !isAuthRequest) {
+      // If unauthorized or forbidden, clear token and redirect (only for non-auth requests)
       sessionStorage.removeItem('token');
       window.location.href = '/login';
     }
