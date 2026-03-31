@@ -515,7 +515,7 @@ export default function TransactionHistory() {
       </Box>
 
       {/* AdSense Integration */}
-      <Ads adSlot="1234567890" sx={{ mb: 4 }} />
+      <Ads adSlot="1234567890" adFormat="horizontal" sx={{ mb: 2 }} />
 
 
       <Paper

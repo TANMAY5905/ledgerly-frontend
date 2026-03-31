@@ -29,11 +29,11 @@ export default function Ads({
   return (
     <Box 
       sx={{ 
-        my: 4, 
+        my: 2, 
         textAlign: 'center', 
         width: '100%', 
         overflow: 'hidden',
-        minHeight: '100px',
+        minHeight: '60px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

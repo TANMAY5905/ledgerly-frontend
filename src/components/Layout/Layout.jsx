@@ -324,7 +324,19 @@ export default function Layout() {
               {user.email}
             </Typography>
           </Box>
-          <IconButton size="small" sx={{ color: '#A0AEC0', '&:hover': { color: '#10B981' } }} onClick={handleLogout}>
+          <IconButton 
+            size="small" 
+            sx={{ 
+              color: '#A0AEC0', 
+              '&:hover': { 
+                color: '#ef4444',
+                bgcolor: 'rgba(239, 68, 68, 0.1)',
+                boxShadow: '0 0 12px rgba(239, 68, 68, 0.2)'
+              } 
+            }} 
+            onClick={handleLogout}
+            title="Logout"
+          >
             <LogOut size={18} />
           </IconButton>
         </Box>
