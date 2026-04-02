@@ -215,6 +215,7 @@ export default function Dashboard() {
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState(null);
 
   const [enlargedChart, setEnlargedChart] = useState(null);
@@ -247,12 +248,17 @@ export default function Dashboard() {
 
   const fetchDashboard = async () => {
     try {
-      setLoading(true);
+      if (!data) {
+        setLoading(true);
+      } else {
+        setIsRefreshing(true);
+      }
       setError(null);
       
       if (selectedGroupId === 'PERSONAL') {
         if (filterType === 'CUSTOM' && (!customStart || !customEnd)) {
           setLoading(false);
+          setIsRefreshing(false);
           return;
         }
         
@@ -282,6 +288,7 @@ export default function Dashboard() {
       setError("Failed to load dashboard data.");
     } finally {
       setLoading(false);
+      setIsRefreshing(false);
     }
   };
 
@@ -289,7 +296,7 @@ export default function Dashboard() {
     fetchDashboard();
   }, [filterType, customStart, customEnd, selectedGroupId]);
 
-  if (loading) {
+  if (loading && !data) {
     return (
       <Box
         sx={{
@@ -962,33 +969,89 @@ export default function Dashboard() {
             )}
 
             {enlargedChart?.type === 'pie' && (
-              <ResponsiveContainer width="100%" height="90%">
-                <PieChart>
-                  <Pie 
-                    data={enlargedChart.data} 
-                    dataKey="value" 
-                    innerRadius="50%" 
-                    outerRadius="75%" 
-                    paddingAngle={5}
-                    label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
-                    labelLine={{ stroke: 'rgba(255,255,255,0.3)' }}
-                  >
+              <Box sx={{ 
+                height: '100%', 
+                width: '100%', 
+                display: 'flex', 
+                flexDirection: { xs: 'column', md: 'row' },
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 4
+              }}>
+                <Box sx={{ width: { xs: '100%', md: '60%' }, height: { xs: '300px', md: '100%' } }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie 
+                        data={enlargedChart.data} 
+                        dataKey="value" 
+                        innerRadius={isDesktop ? "50%" : "40%"} 
+                        outerRadius={isDesktop ? "75%" : "60%"} 
+                        paddingAngle={5}
+                        label={isDesktop ? (({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`) : false}
+                        labelLine={isDesktop}
+                      >
+                        {enlargedChart.data.map((entry, index) => {
+                          const hue = Math.round((index * 360) / Math.max(1, enlargedChart.data.length));
+                          return <Cell key={index} fill={`hsl(${hue}, 70%, 50%)`} />;
+                        })}
+                      </Pie>
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: "#000",
+                          border: "1px solid rgba(255, 255, 255, 0.2)",
+                          borderRadius: "8px",
+                        }}
+                        formatter={(value, name) => [`₹${Number(value).toFixed(2)}`, name]}
+                      />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </Box>
+                <Box sx={{ 
+                  width: { xs: '100%', md: '40%' }, 
+                  maxHeight: { xs: '200px', md: '100%' }, 
+                  overflowY: 'auto',
+                  pr: 2
+                }}>
+                  <Typography variant="subtitle1" fontWeight="bold" sx={{ color: '#10b981', mb: 2, display: { xs: 'none', md: 'block' } }}>
+                    Breakdown Details
+                  </Typography>
+                  <List size="small" sx={{ 
+                    display: 'flex', 
+                    flexDirection: { xs: 'row', md: 'column' }, 
+                    flexWrap: 'wrap',
+                    gap: 1
+                  }}>
                     {enlargedChart.data.map((entry, index) => {
                       const hue = Math.round((index * 360) / Math.max(1, enlargedChart.data.length));
-                      return <Cell key={index} fill={`hsl(${hue}, 70%, 50%)`} />;
+                      const total = enlargedChart.data.reduce((sum, d) => sum + d.value, 0);
+                      const percent = ((entry.value / total) * 100).toFixed(1);
+                      return (
+                        <ListItem key={index} sx={{ 
+                          p: 0, 
+                          width: { xs: 'auto', md: '100%' },
+                          mb: { xs: 0, md: 1.5 },
+                          mr: { xs: 2, md: 0 }
+                        }}>
+                          <Box sx={{ 
+                            width: 12, 
+                            height: 12, 
+                            borderRadius: '50%', 
+                            bgcolor: `hsl(${hue}, 70%, 50%)`,
+                            mr: 1.5,
+                            flexShrink: 0
+                          }} />
+                          <ListItemText 
+                            primary={entry.name}
+                            secondary={`₹${entry.value.toFixed(2)} (${percent}%)`}
+                            primaryTypographyProps={{ variant: 'body2', fontWeight: 600, color: '#fff' }}
+                            secondaryTypographyProps={{ variant: 'caption', color: '#A0AEC0' }}
+                          />
+                        </ListItem>
+                      );
                     })}
-                  </Pie>
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "#000",
-                      border: "1px solid rgba(255, 255, 255, 0.2)",
-                      borderRadius: "8px",
-                    }}
-                    formatter={(value, name) => [`₹${Number(value).toFixed(2)}`, name]}
-                  />
-                  <Legend verticalAlign="bottom" height={36}/>
-                </PieChart>
-              </ResponsiveContainer>
+                  </List>
+                </Box>
+              </Box>
             )}
 
             {enlargedChart?.type === 'bar' && (

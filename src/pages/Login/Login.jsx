@@ -64,19 +64,21 @@ export default function Login() {
       if (data && data.token) {
         sessionStorage.setItem('token', data.token);
         navigate('/dashboard');
+        // We explicitly do NOT setLoading(false) here to avoid a split-second 
+        // flash of the login form while the dashboard is loading
       } else if (!isLogin) {
         // Fallback for registration without auto-login token
         setIsLogin(true);
         setError('');
         setUsername('');
         setPassword('');
-        // We could also show a success toast here
+        setLoading(false);
       } else {
         setError('Invalid response from server.');
+        setLoading(false);
       }
     } catch (err) {
       setError(err.response?.data?.message || (isLogin ? 'Invalid username or password.' : 'Registration failed.'));
-    } finally {
       setLoading(false);
     }
   };
