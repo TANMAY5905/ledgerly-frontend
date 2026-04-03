@@ -33,6 +33,25 @@ export default function Landing() {
                 Ledgerly
               </Typography>
             </Box>
+
+            {/* Navbar Links - Desktop only */}
+            {!isMobile && (
+              <Box sx={{ display: "flex", gap: 3 }}>
+                <Button onClick={() => navigate("/about")} sx={{ color: "#718096", textTransform: 'none', fontWeight: 500, '&:hover': { color: '#10B981' } }}>
+                  About Us
+                </Button>
+                <Button onClick={() => navigate("/privacy-policy")} sx={{ color: "#718096", textTransform: 'none', fontWeight: 500, '&:hover': { color: '#10B981' } }}>
+                  Privacy Policy
+                </Button>
+                <Button onClick={() => navigate("/terms-of-service")} sx={{ color: "#718096", textTransform: 'none', fontWeight: 500, '&:hover': { color: '#10B981' } }}>
+                  Terms & Conditions
+                </Button>
+                <Button onClick={() => navigate("/contact")} sx={{ color: "#718096", textTransform: 'none', fontWeight: 500, '&:hover': { color: '#10B981' } }}>
+                  Contact Us
+                </Button>
+              </Box>
+            )}
+
             <Box sx={{ display: "flex", gap: { xs: 1, sm: 2 } }}>
               <Button onClick={() => navigate("/login")} sx={{ color: "#A0AEC0", textTransform: 'none', fontWeight: 600, '&:hover': { color: '#fff' } }}>
                 Login
@@ -83,7 +102,7 @@ export default function Landing() {
                 The intelligent way to track personal spending, manage group expenses, and visualize your financial heartbeat.
               </Typography>
             </motion.div>
-
+ 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -97,7 +116,7 @@ export default function Landing() {
                   endIcon={<ChevronRight />}
                   sx={{ bgcolor: "#10B981", color: "#fff", py: 2, px: 5, borderRadius: 3, fontWeight: "bold", textTransform: "none", fontSize: "1.1rem", '&:hover': { bgcolor: "#0d9467", transform: 'scale(1.02)' }, transition: 'all 0.2s' }}
                 >
-                  Start Tracking Free
+                  Get Started
                 </Button>
                 <Button 
                   size="large" 
@@ -105,7 +124,7 @@ export default function Landing() {
                   onClick={() => navigate("/login")}
                   sx={{ borderColor: "rgba(255,255,255,0.1)", color: "#fff", py: 2, px: 5, borderRadius: 3, fontWeight: "bold", textTransform: "none", fontSize: "1.1rem", '&:hover': { bgcolor: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.2)" } }}
                 >
-                  View My Dashboard
+                  Login
                 </Button>
               </Box>
             </motion.div>
