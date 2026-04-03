@@ -123,9 +123,43 @@ export default function Landing() {
       </Box>
 
       {/* Footer */}
-      <Box sx={{ py: 6, borderTop: '1px solid rgba(255,255,255,0.05)', bgcolor: 'rgba(0,0,0,0.5)', textAlign: 'center' }}>
+      <Box sx={{ py: 8, borderTop: '1px solid rgba(255,255,255,0.05)', bgcolor: 'rgba(0,0,0,0.5)' }}>
         <Container maxWidth="lg">
-          <Typography variant="body2" sx={{ color: '#4A5568' }}>
+          <Grid container spacing={4} justifyContent="center" sx={{ mb: 4 }}>
+            <Grid item xs={6} sm={3} sx={{ textAlign: 'center' }}>
+              <Link 
+                onClick={() => navigate("/about")} 
+                sx={{ color: '#718096', textDecoration: 'none', cursor: 'pointer', '&:hover': { color: '#10B981' }, transition: 'all 0.2s' }}
+              >
+                About Us
+              </Link>
+            </Grid>
+            <Grid item xs={6} sm={3} sx={{ textAlign: 'center' }}>
+              <Link 
+                onClick={() => navigate("/privacy-policy")} 
+                sx={{ color: '#718096', textDecoration: 'none', cursor: 'pointer', '&:hover': { color: '#10B981' }, transition: 'all 0.2s' }}
+              >
+                Privacy Policy
+              </Link>
+            </Grid>
+            <Grid item xs={6} sm={3} sx={{ textAlign: 'center' }}>
+              <Link 
+                onClick={() => navigate("/terms-of-service")} 
+                sx={{ color: '#718096', textDecoration: 'none', cursor: 'pointer', '&:hover': { color: '#10B981' }, transition: 'all 0.2s' }}
+              >
+                Terms & Conditions
+              </Link>
+            </Grid>
+            <Grid item xs={6} sm={3} sx={{ textAlign: 'center' }}>
+              <Link 
+                onClick={() => navigate("/contact")} 
+                sx={{ color: '#718096', textDecoration: 'none', cursor: 'pointer', '&:hover': { color: '#10B981' }, transition: 'all 0.2s' }}
+              >
+                Contact Us
+              </Link>
+            </Grid>
+          </Grid>
+          <Typography variant="body2" sx={{ color: '#4A5568', textAlign: 'center' }}>
             © 2026 Ledgerly. All rights reserved.
           </Typography>
         </Container>

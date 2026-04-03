@@ -44,13 +44,15 @@ function App() {
               <Route path="/update-transaction/:id" element={<UpdateTransaction />} />
               <Route path="/transaction-history" element={<TransactionHistory />} />
               <Route path="/groups" element={<Groups />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/terms-of-service" element={<TermsOfService />} />
-              <Route path="/contact" element={<Contact />} />
             </Route>
 
           </Route>
+
+          {/* Publicly available legal pages */}
+          <Route path="/about" element={<About />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/contact" element={<Contact />} />
           
           {/* Catch all fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />
